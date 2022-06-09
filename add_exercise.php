@@ -184,8 +184,6 @@ if (isset($_POST['AddExercise'])){
                                     <div class="fallback">
                                         <input name="file" type="file" />
                                     </div>
-                                                
-                                                
                                     <center>
                                         <button type="submit" class="btn btn-primary" name="AddExercise">Add</button>
                                     </div>
