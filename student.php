@@ -113,8 +113,11 @@ if (isset($_GET['id'])) {
                                 class="nav-text">Students</span></a>
                     </li>
                     <?php if (isset($_SESSION['role']) && ( $_SESSION['role'] == 'teacher')) { ?>
-                    <li><a href="add_exercise.php" aria-expanded="false"><i class="icon icon-users-mm"></i><span
+                    <li><a href="add_exercise.php" aria-expanded="false"><i class="icon icon-single-copy-06"></i><span
                                 class="nav-text">Add exercise</span></a>
+                    </li>
+                    <li><a href="add_user.php" aria-expanded="false"><i class="icon icon-users-mm"></i><span
+                                class="nav-text">Add user</span></a>
                     </li>
                     <?php } ?>
                 </ul>
