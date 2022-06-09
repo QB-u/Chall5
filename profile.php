@@ -37,7 +37,7 @@ $result = $conn -> query($sql);
     <link rel="stylesheet" href="./assets/vendor/owl-carousel/css/owl.carousel.min.css">
     <link rel="stylesheet" href="./assets/vendor/owl-carousel/css/owl.theme.default.min.css">
     <link href="./assets/css/style.css" rel="stylesheet">
-    <link href="./assets/vendor/sweetalert2/disISP@123t/sweetalert2.min.css" rel="stylesheet">
+    <link href="./assets/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 
 <body>
