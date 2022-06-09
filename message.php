@@ -144,7 +144,7 @@ if (isset($_POST['send'])) {
                                         <label class="col-sm-3 col-form-label">Send to</label>
                                         <div class="col-sm-9">
                                             <input class="form-control" name="username"
-                                                placeholder="<?php echo $row['username']; ?>"
+                                                placeholder="<?php echo htmlentities($row['username']); ?>"
                                                 disabled>
                                         </div>
                                     </div>
