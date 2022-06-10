@@ -11,7 +11,9 @@ if (!(isset($_SESSION['role']) && $_SESSION['role'] == 'teacher')) {
 }
 $id = $_GET['id'];
 if (isset($_GET['id'])) {
-    $sql = " SELECT * FROM  UserInformation WHERE id = $id";
+    $sql = " SELECT * FROM  UserInformation WHERE ID = $id";
+    $result = $conn -> query($sql);
+    $row = $result->fetch_assoc();
 }
 if (isset($_POST['edit'])){
     $username = $_POST['username'];
@@ -144,7 +146,7 @@ if (isset($_POST['edit'])){
                                         <label class="col-sm-3 col-form-label">Username</label>
                                         <div class="col-sm-9">
                                             <input class="form-control" name="username"
-                                                placeholder="<?php echo htmlentities($_SESSION['username']); ?>">
+                                                placeholder="<?php echo htmlentities($row['username']); ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -158,21 +160,21 @@ if (isset($_POST['edit'])){
                                         <label class="col-sm-3 col-form-label">Fullname</label>
                                         <div class="col-sm-9">
                                             <input class="form-control" name="fullname"
-                                                placeholder="<?php echo htmlentities($_SESSION['fullname']); ?>">
+                                                placeholder="<?php echo htmlentities($row['fullname']); ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Email</label>
                                         <div class="col-sm-9">
                                             <input class="form-control" name="email"
-                                                placeholder="<?php echo htmlentities($_SESSION['email']); ?>">
+                                                placeholder="<?php echo htmlentities($row['Email']); ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Phone Number</label>
                                         <div class="col-sm-9">
                                             <input class="form-control" name="SDT"
-                                                placeholder="<?php echo htmlentities($_SESSION['SDT']); ?>">
+                                                placeholder="<?php echo htmlentities($row['SDT']); ?>">
                                         </div>
                                     </div>
                                     <center>

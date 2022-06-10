@@ -24,7 +24,6 @@ if (isset($_POST[Submit])){
     $fileTmpName = $file['tmp_name'];
     $fileSize = $file['size'];
     $fileError = $file['error'];
-    $fileType = $file['type'];
     $fileExt = explode('.',$fileName);
     $fileActualExt = strtolower(end($fileExt));
     $allowed = array('jpg','jpeg','png','gif','pdf','docx','zip','rar');
