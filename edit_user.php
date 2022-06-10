@@ -1,21 +1,33 @@
 <?php
 include 'session.php';
+include 'ConnectDB.php';
 if (!(isset($_SESSION['is_login']) && $_SESSION['is_login'] == true)) {
     header('Location: login.php');
     exit();
 }
-require_once 'ConnectDB.php';
-$conn = mysqli_connect($MYSQL_HOST,$MYSQL_USERNAME,$MYSQL_PASSWORD);
-if (!$conn) {
-    die('Could not connect: ' . mysql_error());
+if (!(isset($_SESSION['role']) && $_SESSION['role'] == 'teacher')) {
+    header('HTTP/1.0 403 Forbidden');
+    exit();
 }
-mysqli_select_db($conn,$MYSQL_DB);
-$sql = "SELECT * FROM UserInformation ORDER BY id";
-$result = $conn -> query($sql);     
+$id = $_GET['id'];
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM UserInformation WHERE id = $id";
+    $sql = " SELECT * FROM  UserInformation WHERE id = $id";
+}
+if (isset($_POST['edit'])){
+    $username = $_POST['username'];
+    $SDT = $_POST['SDT'];
+    $password = $_POST['password'];
+    $fullname = $_POST['fullname'];
+    $email = $_POST['email'];
+    $sql = "UPDATE UserInformation SET username = '$username', password = '$password', fullname = '$fullname', Email = '$email', SDT = '$SDT' WHERE id = $id";
     $result = $conn -> query($sql);
+    if ($result) {
+        echo "<script>alert('Edit user success');</script>";
+        header ("Location: edit_user.php?id=$id");
+    }
+    else {
+        echo "<script>alert('Edit user fail');</script>";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -25,7 +37,7 @@ if (isset($_GET['id'])) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Students</title>
+    <title>Edit_user</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/images/KC (1).png">
     <link rel="stylesheet" href="./assets/vendor/owl-carousel/css/owl.carousel.min.css">
@@ -35,23 +47,20 @@ if (isset($_GET['id'])) {
 </head>
 
 <body>
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
+        </div>
+    </div>
     <!--**********************************
         Main wrapper start
     ***********************************-->
-    <div id="preloader">
-    <div class="sk-three-bounce">
-        <div class="sk-child sk-bounce1"></div>
-        <div class="sk-child sk-bounce2"></div>
-        <div class="sk-child sk-bounce3"></div>
-    </div>
-</div>
-<div id="main-wrapper">
-        <!--**********************************
-            Nav header start
-        ***********************************-->
+    <div id="main-wrapper">
         <div class="nav-header">
             <a href="index.html" class="brand-logo">
-                <img class="logo-abbr" src="./assets/images/KCC.png" alt="">
+                <img class="logo-abbr" src="./assets/images/KC.png" alt="">
                 <img class="logo-compact" src="./assets/images/logo-text.png" alt="">
                 <img class="brand-title" src="./assets/images/logo-text.png" alt="">
             </a>
@@ -96,20 +105,17 @@ if (isset($_GET['id'])) {
                 </nav>
             </div>
         </div>
-        <!--**********************************
-    Sidebar start
-***********************************-->
         <div class="quixnav">
             <div class="quixnav-scroll">
                 <ul class="metismenu" id="menu">
                     <li class="nav-label first">Main Menu</li>
-                    <li><a href="/" aria-expanded="false"><i class="icon icon-home"></i><span
+                    <li><a href="index.php" aria-expanded="false"><i class="icon icon-home"></i><span
                                 class="nav-text">Home</span></a>
                     </li>
                     <li><a href="/exercise.php" aria-expanded="false"><i class="icon icon-single-copy-06"></i><span
-                                class="nav-text">Exercise</span></a>
+                                class="nav-text">Exercises</span></a>
                     </li>
-                    <li><a href="/student.php" aria-expanded="false"><i class="icon icon-users-mm"></i><span
+                    <li><a href="student.php" aria-expanded="false"><i class="icon icon-users-mm"></i><span
                                 class="nav-text">Students</span></a>
                     </li>
                     <?php if (isset($_SESSION['role']) && ( $_SESSION['role'] == 'teacher')) { ?>
@@ -123,73 +129,63 @@ if (isset($_GET['id'])) {
                 </ul>
             </div>
         </div>
-        <!--**********************************
-            Content body start
-        ***********************************-->
         <div class="content-body" id="app">
             <!-- row -->
             <div class="container-fluid">
-                <div class="row page-titles mx-0">
-                        <div class="col-sm-6 p-md-0">
-                            <div class="welcome-text">
-                                <h4>Hi <?php echo htmlentities($_SESSION['fullname']); ?>, welcome back!</h4>
-                                <span class="ml-1"></span>
+                <div class="row justify-content-md-center">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Infomation</h4>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Table Students</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-responsive-sm">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Username</th>
-                                                    <th>Fullname</th>
-                                                    <th>Phone</th>
-                                                    <th>Email</th>
-                                                    <th>Send Message</th>
-                                                    <?php if (isset($_SESSION['role']) && ( $_SESSION['role'] == 'teacher')) { ?>
-                                                    <th>Edit</th>
-                                                    <th>Delete</th>
-                                                    <?php } ?>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php while ($row = $result -> fetch_assoc()) { ?>
-                                                    <tr>
-                                                        <td><?php echo htmlentities($row['ID']); ?></td>
-                                                        <td><?php echo htmlentities($row['username'])?></td>
-                                                        <td><?php echo htmlentities($row['fullname']); ?></td>
-                                                        <td><?php echo htmlentities($row['SDT']); ?></td>
-                                                        <td><?php echo htmlentities($row['Email']); ?></td>
-                                                        <td><a href = "message.php?id=<?php echo $row['ID']?>">Send Message</a></td>
-                                                        <?php if (isset($_SESSION['role']) && ( $_SESSION['role'] == 'teacher')) { ?>
-                                                        <td><a href = "edit_user.php?id=<?php echo $row['ID']?>">Edit</a></td>
-                                                        <td><a href = "delete_user.php?id=<?php echo $row['ID']?>">Delete</a></td>
-                                                        <?php } ?>
-                                                    </tr>
-                                                </tr>
-                                                <?php } ?>
-                                            </tbody>
-                                        </table>
+                            <div class="card-body">
+                                <form method="POST" name="edit">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Username</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" name="username"
+                                                placeholder="<?php echo htmlentities($_SESSION['username']); ?>">
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Password</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" name="password" type="password"
+                                                placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Fullname</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" name="fullname"
+                                                placeholder="<?php echo htmlentities($_SESSION['fullname']); ?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Email</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" name="email"
+                                                placeholder="<?php echo htmlentities($_SESSION['email']); ?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3 col-form-label">Phone Number</label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" name="SDT"
+                                                placeholder="<?php echo htmlentities($_SESSION['SDT']); ?>">
+                                        </div>
+                                    </div>
+                                    <center>
+                                            <button type="submit" name="edit"
+                                                class="btn btn-primary btn-block">Save</button>
+                                    </center>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-
-
     </div>
     <!--**********************************
         Main wrapper end
@@ -202,6 +198,7 @@ if (isset($_GET['id'])) {
     <!-- Owl Carousel -->
     <script src="./assets/vendor/owl-carousel/js/owl.carousel.min.js"></script>
     <!-- Counter Up -->
+    <script src="./assets/vendor/jqvmap/js/jquery.vmap.min.js"></script>
     <script src="./assets/vendor/jqvmap/js/jquery.vmap.usa.js"></script>
     <script src="./assets/vendor/jquery.counterup/jquery.counterup.min.js"></script>
     <script src="./assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>

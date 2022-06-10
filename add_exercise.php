@@ -5,6 +5,10 @@ if (!(isset($_SESSION['is_login']) && $_SESSION['is_login'] == true)) {
     header('Location: login.php');
     exit();
 }
+if (!(isset($_SESSION['role']) && $_SESSION['role'] == 'teacher')) {
+    header('HTTP/1.0 403 Forbidden');
+    exit();
+}
 require_once 'ConnectDB.php';
 $conn = mysqli_connect($MYSQL_HOST,$MYSQL_USERNAME,$MYSQL_PASSWORD);
 if (!$conn) {
