@@ -146,40 +146,39 @@ if (isset($_POST['edit'])){
                                         <label class="col-sm-3 col-form-label">Username</label>
                                         <div class="col-sm-9">
                                             <input class="form-control" name="username"
-                                                placeholder="<?php echo htmlentities($row['username']); ?>">
+                                                value="<?php echo htmlentities($row['username']); ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Password</label>
                                         <div class="col-sm-9">
                                             <input class="form-control" name="password" type="password"
-                                                placeholder="">
+                                                value="">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Fullname</label>
                                         <div class="col-sm-9">
                                             <input class="form-control" name="fullname"
-                                                placeholder="<?php echo htmlentities($row['fullname']); ?>">
+                                                value="<?php echo htmlentities($row['fullname']); ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Email</label>
                                         <div class="col-sm-9">
                                             <input class="form-control" name="email"
-                                                placeholder="<?php echo htmlentities($row['Email']); ?>">
+                                                value="<?php echo htmlentities($row['Email']); ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Phone Number</label>
                                         <div class="col-sm-9">
                                             <input class="form-control" name="SDT"
-                                                placeholder="<?php echo htmlentities($row['SDT']); ?>">
+                                                value="<?php echo htmlentities($row['SDT']); ?>">
                                         </div>
                                     </div>
                                     <center>
-                                            <button type="submit" name="edit"
-                                                class="btn btn-primary btn-block">Save</button>
+                                            <button type="submit" name="edit" class="btn btn-primary btn-block">Save</button>
                                     </center>
                                 </form>
                             </div>

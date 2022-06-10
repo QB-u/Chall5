@@ -138,7 +138,7 @@ $result = $conn -> query($sql);
                                         <label class="col-sm-3 col-form-label">Username</label>
                                         <div class="col-sm-9">
                                             <input class="form-control" name="username"
-                                                placeholder="<?php echo htmlentities($_SESSION['username']); ?>"
+                                                value="<?php echo htmlentities($_SESSION['username']); ?>"
                                                 <?php echo $is_student ? 'disabled' : ''; ?>>
                                         </div>
                                     </div>
@@ -146,7 +146,7 @@ $result = $conn -> query($sql);
                                         <label class="col-sm-3 col-form-label">Fullname</label>
                                         <div class="col-sm-9">
                                             <input class="form-control" name="fullname"
-                                                placeholder="<?php echo htmlentities($_SESSION['fullname']); ?>"
+                                                value="<?php echo htmlentities($_SESSION['fullname']); ?>"
                                                 <?php echo $is_student ? 'disabled' : ''; ?>>
                                         </div>
                                     </div>
@@ -154,14 +154,14 @@ $result = $conn -> query($sql);
                                         <label class="col-sm-3 col-form-label">Email</label>
                                         <div class="col-sm-9">
                                             <input class="form-control" name="email"
-                                                placeholder="<?php echo htmlentities($_SESSION['email']); ?>">
+                                                value="<?php echo htmlentities($_SESSION['email']); ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3 col-form-label">Phone Number</label>
                                         <div class="col-sm-9">
                                             <input class="form-control" name="SDT"
-                                                placeholder="<?php echo htmlentities($_SESSION['SDT']); ?>">
+                                                value="<?php echo htmlentities($_SESSION['SDT']); ?>">
                                         </div>
                                     </div>
                                     <div class="row">

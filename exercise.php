@@ -136,7 +136,7 @@ $result = $conn -> query($sql);
                                                     <th>FileUpload</th>
                                                     <th>Submit</th>
                                                     <?php if (isset($_SESSION['role']) && ( $_SESSION['role'] == 'teacher')) { ?>
-                                                    <li>Delete</li>
+                                                    <th>Delete</th>
                                                     <?php } ?>
                                                 </tr>
                                             </thead>
@@ -147,13 +147,12 @@ $result = $conn -> query($sql);
                                                         <td><?php echo htmlentities($row['Challname'])?></td>
                                                         <td><?php echo htmlentities($row['Challoverview']); ?></td>
                                                         <td><?php echo htmlentities($row['Challdescription']); ?></td>
-                                                        <td><a href = "<?php echo htmlentities($row['Challfolder']) ; ?>">Dowload</td>
+                                                        <td><a href = "<?php echo htmlentities($row['Challfolder']) ; ?>"class="btn btn-outline-success">Dowload</td>
                                                         <td><a href ="submit.php?idChall=<?php echo htmlentities($row['idChall']); ?>" class="btn btn-primary">Submit</a></td>
                                                         <?php if (isset($_SESSION['role']) && ( $_SESSION['role'] == 'teacher')) { ?>
                                                         <td><a href ="delete_user.php?idChall=<?php echo htmlentities($row['idChall']); ?>" class="btn btn-danger">Delete</a></td>
                                                         <?php } ?>
                                                     </tr>
-                                                </tr>
                                                 <?php } ?>
                                             </tbody>
                                         </table>
