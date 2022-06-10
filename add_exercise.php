@@ -25,7 +25,6 @@ if (isset($_POST['AddExercise'])){
     $fileTmpName = $file['tmp_name'];
     $fileSize = $file['size'];
     $fileError = $file['error'];
-    $fileType = $file['type'];
     $fileExt = explode('.',$fileName);
     $fileActualExt = strtolower(end($fileExt));
     $allowed = array('jpg','jpeg','png','gif','pdf','docx','zip','rar');
@@ -34,7 +33,7 @@ if (isset($_POST['AddExercise'])){
             if ($fileSize < 1000000){
                 $fileDestination = 'upload/'.$fileName;
                 move_uploaded_file($fileTmpName,$fileDestination);
-                $sql = "INSERT INTO Chall (Challname,Challoverview,Challdescription,Challfolder,filename,Challtype) VALUES ('$name','$overview','$Description','$fileDestination','$fileName','$fileType')";
+                $sql = "INSERT INTO Chall (Challname,Challoverview,Challdescription,Challfolder,filename,Challtype) VALUES ('$name','$overview','$Description','$fileDestination','$fileName','$fileActualExt')";
                 $result = $conn -> query($sql);
                 if ($result) {
                     echo "<script>alert('Add exercise success');</script>";

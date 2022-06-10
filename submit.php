@@ -12,7 +12,12 @@ if (!$conn) {
 }
 $username = $_SESSION['username'];
 mysqli_select_db($conn,$MYSQL_DB);
-$id = $_GET['idChall'];
+if(isset($_GET['idChall'])){
+    $id = $_GET['idChall'];
+    $sql = "SELECT * FROM Chall WHERE idChall = $id";
+    $result = $conn -> query($sql);
+    $row = $result -> fetch_assoc();
+}
 if (isset($_POST[Submit])){
     $file = $_FILES['Homework'];
     $fileName = $file['name'];
@@ -151,7 +156,12 @@ if (isset($_POST[Submit])){
             </div>
         </div>
         <div class="content-body" id="app">
-            <!-- row -->
+            <div class="col-md-6">
+            <?php if ($row['Challtype'] == pdf ) { ?>
+                <center>
+                <iframe src="<?php echo htmlentities($row['Challfolder']) ; ?>" width="100%" style="height:500px"></iframe></div>
+                </center>
+            <?php } ?>
             <div class="container-fluid">
                 <div class="row justify-content-md-center">
                     <div class="col-md-6">

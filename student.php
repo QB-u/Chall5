@@ -171,7 +171,7 @@ if (isset($_GET['id'])) {
                                                         <td><a href = "message.php?id=<?php echo $row['ID']?>">Send Message</a></td>
                                                         <?php if (isset($_SESSION['role']) && ( $_SESSION['role'] == 'teacher')) { ?>
                                                         <td><a href = "edit_user.php?id=<?php echo $row['ID']?>">Edit</a></td>
-                                                        <td><a href = "delete_user.php?id=<?php echo $row['ID']?>">Delete</a></td>
+                                                        <td><a href = "delete_user.php?id=<?php echo $row['ID']?>"class="btn btn-danger">Delete</a></td>
                                                         <?php } ?>
                                                     </tr>
                                                 </tr>
