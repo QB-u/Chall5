@@ -9,9 +9,9 @@ if (!(isset($_SESSION['role']) && $_SESSION['role'] == 'teacher')) {
     header('HTTP/1.0 403 Forbidden');
     exit();
 }
-$id = mysqli_real_escape_string($conn,$_GET['id']);
+$id = (int) mysqli_real_escape_string($conn,$_GET['id']);
 if (isset($_GET['id'])) {
-    $sql = " SELECT * FROM  UserInformation WHERE ID = $id";
+    $sql = "SELECT * FROM  UserInformation WHERE ID = $id";
     $result = $conn -> query($sql);
     $row = $result->fetch_assoc();
 }
