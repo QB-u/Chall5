@@ -140,7 +140,7 @@ if (isset($_GET['id'])) {
                     <?php while ($row = $result -> fetch_assoc()) { ?>
                         <tr>
                             <td><?php echo htmlentities($row['user']); ?></td>
-                            <td><a href="<?php echo htmlentities($row['folder']) ; ?>"
+                            <td><a  href="<?php echo htmlentities($row['folder']) ; ?> "download
                                     class="btn btn-outline-success">Dowload</td>
                             <td><a href="delete_user.php?idsubmit=<?php echo htmlentities($row['idsubmit']); ?>"
                                     class="btn btn-danger">Delete</a></td>

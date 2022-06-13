@@ -148,7 +148,7 @@ $result = $conn -> query($sql);
                                                         <td><?php echo htmlentities($row['Challname'])?></td>
                                                         <td><?php echo htmlentities($row['Challoverview']); ?></td>
                                                         <td><?php echo htmlentities($row['Challdescription']); ?></td>
-                                                        <td><a href = "<?php echo htmlentities($row['Challfolder']) ; ?>"class="btn btn-outline-success">Dowload</td>
+                                                        <td><a href = "<?php echo htmlentities($row['Challfolder']) ; ?> " download class="btn btn-outline-success">Dowload</td>
                                                         <td><a href ="submit.php?idChall=<?php echo htmlentities($row['idChall']); ?>" class="btn btn-primary">Submit</a></td>
                                                         <?php if (isset($_SESSION['role']) && ( $_SESSION['role'] == 'teacher')) { ?>
                                                         <td><a href ="delete_user.php?idChall=<?php echo htmlentities($row['idChall']); ?>" class="btn btn-danger">Delete</a></td>
