@@ -8,10 +8,10 @@ if (!(isset($_SESSION['is_login']) && $_SESSION['is_login'] == true)) {
 $is_student = $_SESSION['role'] === 'student' ? true : false;
 $ID = $_SESSION['id'];
 if (isset($_POST['information'])){
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $fullname = $_POST['fullname'];
-    $sdt = $_POST['SDT'];
+    $username = mysqli_real_escape_string($conn,$_POST['username']);
+    $email = mysqli_real_escape_string($conn,$_POST['email']);
+    $fullname = mysqli_real_escape_string($conn,$_POST['fullname']);
+    $sdt = mysqli_real_escape_string($conn,$_POST['SDT']);
     $sql = "UPDATE UserInformation SET username = '$username', fullname = '$fullname', Email = '$email', SDT = '$sdt' WHERE  ID = '$ID'";
     $result = $conn -> query($sql);
     if ($result) {

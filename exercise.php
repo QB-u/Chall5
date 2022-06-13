@@ -105,9 +105,6 @@ $result = $conn -> query($sql);
                                 class="nav-text">Add user</span></a>
                     </li>
                     <?php } ?>
-                    <li><a href="submitted.php" aria-expanded="false"><i class="icon icon-users-mm"></i><span
-                                class="nav-text">Submitted</span></a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -140,6 +137,7 @@ $result = $conn -> query($sql);
                                                     <th>Submit</th>
                                                     <?php if (isset($_SESSION['role']) && ( $_SESSION['role'] == 'teacher')) { ?>
                                                     <th>Delete</th>
+                                                    <th>Submitted</th>
                                                     <?php } ?>
                                                 </tr>
                                             </thead>
@@ -154,6 +152,7 @@ $result = $conn -> query($sql);
                                                         <td><a href ="submit.php?idChall=<?php echo htmlentities($row['idChall']); ?>" class="btn btn-primary">Submit</a></td>
                                                         <?php if (isset($_SESSION['role']) && ( $_SESSION['role'] == 'teacher')) { ?>
                                                         <td><a href ="delete_user.php?idChall=<?php echo htmlentities($row['idChall']); ?>" class="btn btn-danger">Delete</a></td>
+                                                        <td><a href ="submitted.php?id=<?php echo htmlentities($row['idChall']); ?>" class="btn btn-primary">Submitted</a></td>
                                                         <?php } ?>
                                                     </tr>
                                                 <?php } ?>

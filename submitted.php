@@ -6,13 +6,8 @@ if (!(isset($_SESSION['is_login']) && $_SESSION['is_login'] == true)) {
 }
 include 'ConnectDB.php';
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+    $id = mysqli_real_escape_string($conn, $_GET['id']);
     $sql = "SELECT * FROM submit WHERE idsubmit = $id";
-    $result = $conn -> query($sql);
-}
-if (!(isset($_GET['id']) && $_SESSION['role'] == 'teacher')) {
-    $username = $_SESSION['username'];
-    $sql = "SELECT * FROM submit WHERE user = $username";
     $result = $conn -> query($sql);
 }
 ?>
@@ -112,9 +107,6 @@ if (!(isset($_GET['id']) && $_SESSION['role'] == 'teacher')) {
                                 class="nav-text">Add user</span></a>
                     </li>
                     <?php } ?>
-                    <li><a href="submitted.php" aria-expanded="false"><i class="icon icon-users-mm"></i><span
-                                class="nav-text">Submitted</span></a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -145,12 +137,12 @@ if (!(isset($_GET['id']) && $_SESSION['role'] == 'teacher')) {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while ($row = $result -> fetch_assoc()) { ?>
+                    <?php while ($row = $result -> fetch_assoc()) { ?>
                         <tr>
                             <td><?php echo htmlentities($row['user']); ?></td>
                             <td><a href="<?php echo htmlentities($row['folder']) ; ?>"
                                     class="btn btn-outline-success">Dowload</td>
-                            <td><a href="delete_user.php?idChall=<?php echo htmlentities($row['idChall']); ?>"
+                            <td><a href="delete_user.php?idsubmit=<?php echo htmlentities($row['idsubmit']); ?>"
                                     class="btn btn-danger">Delete</a></td>
                         </tr>
                         <?php } ?>

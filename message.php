@@ -12,14 +12,14 @@ if (!$conn) {
 }
 mysqli_select_db($conn,$MYSQL_DB); 
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+    $id = mysqli_real_escape_string($conn,$_GET['id']);
     $sql = "SELECT * FROM UserInformation WHERE id = $id";
     $result = $conn -> query($sql);
 }
 if (isset($_POST['send'])) {
     $send_id = $_SESSION['id'];
-    $receive_id = $_GET['id'];
-    $message = $_POST['content'];
+    $receive_id = mysqli_real_escape_string($conn,$_GET['id']);
+    $message = mysqli_real_escape_string($conn,$_POST['message']);
     $sql = "INSERT INTO mess (sender_id,receiver_id,content,time) VALUES ('$send_id','$receive_id','$message',now())";
     $result = $conn -> query($sql);
     if ($result) {

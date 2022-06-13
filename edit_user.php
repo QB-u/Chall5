@@ -9,18 +9,18 @@ if (!(isset($_SESSION['role']) && $_SESSION['role'] == 'teacher')) {
     header('HTTP/1.0 403 Forbidden');
     exit();
 }
-$id = $_GET['id'];
+$id = mysqli_real_escape_string($conn,$_GET['id']);
 if (isset($_GET['id'])) {
     $sql = " SELECT * FROM  UserInformation WHERE ID = $id";
     $result = $conn -> query($sql);
     $row = $result->fetch_assoc();
 }
 if (isset($_POST['edit'])){
-    $username = $_POST['username'];
-    $SDT = $_POST['SDT'];
-    $password = $_POST['password'];
-    $fullname = $_POST['fullname'];
-    $email = $_POST['email'];
+    $username = mysqli_real_escape_string($conn,$_POST['username']);
+    $SDT = mysqli_real_escape_string($conn,$_POST['SDT']);
+    $password = mysqli_real_escape_string($conn,$_POST['password']);
+    $fullname = mysqli_real_escape_string($conn,$_POST['fullname']);
+    $email = mysqli_real_escape_string($conn,$_POST['email']);
     $sql = "UPDATE UserInformation SET username = '$username', password = '$password', fullname = '$fullname', Email = '$email', SDT = '$SDT' WHERE id = $id";
     $result = $conn -> query($sql);
     if ($result) {
@@ -128,9 +128,6 @@ if (isset($_POST['edit'])){
                                 class="nav-text">Add user</span></a>
                     </li>
                     <?php } ?>
-                    <li><a href="submitted.php" aria-expanded="false"><i class="icon icon-users-mm"></i><span
-                                class="nav-text">Submitted</span></a>
-                    </li>
                 </ul>
             </div>
         </div>

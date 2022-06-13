@@ -6,8 +6,8 @@ if (!$conn) {
     die('Could not connect: ' . mysql_error());
 }
 mysqli_select_db($conn,$MYSQL_DB);
-$username = $_POST['username'];
-$password = $_POST['password'];
+$username = mysqli_real_escape_string($conn,$_POST['username']);
+$password = mysqli_real_escape_string($conn,$_POST['password']);
 $sql = "SELECT * FROM UserInformation WHERE username = '$username' AND password = '$password'";
 $result = $conn -> query($sql);
 if(isset($_POST['login'])){

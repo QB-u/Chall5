@@ -13,7 +13,7 @@ mysqli_select_db($conn,$MYSQL_DB);
 $sql = "SELECT * FROM UserInformation ORDER BY id";
 $result = $conn -> query($sql);     
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+    $id = mysqli_real_escape_string($conn,$_GET['id']);
     $sql = "SELECT * FROM UserInformation WHERE id = $id";
     $result = $conn -> query($sql);
 }
@@ -120,9 +120,6 @@ if (isset($_GET['id'])) {
                                 class="nav-text">Add user</span></a>
                     </li>
                     <?php } ?>
-                    <li><a href="submitted.php" aria-expanded="false"><i class="icon icon-users-mm"></i><span
-                                class="nav-text">Submitted</span></a>
-                    </li>
                 </ul>
             </div>
         </div>

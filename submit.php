@@ -12,7 +12,7 @@ if (!$conn) {
 mysqli_select_db($conn,$MYSQL_DB);
 $username = $_SESSION['username'];
 if(isset($_GET['idChall'])){
-    $id = $_GET['idChall'];
+    $id = mysqli_real_escape_string($conn,$_GET['idChall']);
     $sql = "SELECT * FROM Chall WHERE idChall = $id";
     $result = $conn -> query($sql);
     $row = $result -> fetch_assoc();
@@ -150,9 +150,6 @@ if (isset($_POST[Submit])){
                                 class="nav-text">Add user</span></a>
                     </li>
                     <?php } ?>
-                    <li><a href="submitted.php" aria-expanded="false"><i class="icon icon-users-mm"></i><span
-                                class="nav-text">Submitted</span></a>
-                    </li>
                 </ul>
             </div>
         </div>
