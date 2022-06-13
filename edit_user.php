@@ -128,6 +128,9 @@ if (isset($_POST['edit'])){
                                 class="nav-text">Add user</span></a>
                     </li>
                     <?php } ?>
+                    <li><a href="submitted.php" aria-expanded="false"><i class="icon icon-users-mm"></i><span
+                                class="nav-text">Submitted</span></a>
+                    </li>
                 </ul>
             </div>
         </div>

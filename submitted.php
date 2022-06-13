@@ -4,14 +4,15 @@ if (!(isset($_SESSION['is_login']) && $_SESSION['is_login'] == true)) {
     header('Location: login.php');
     exit();
 }
-if (!isset($_SESSION['role']) && $_SESSION['role'] == 'teacher') {
-    header('HTTP/1.1 403 Forbidden');
-    exit();
-}
 include 'ConnectDB.php';
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT * FROM submit WHERE ID = $id";
+    $sql = "SELECT * FROM submit WHERE idsubmit = $id";
+    $result = $conn -> query($sql);
+}
+if (!(isset($_GET['id']) && $_SESSION['role'] == 'teacher')) {
+    $username = $_SESSION['username'];
+    $sql = "SELECT * FROM submit WHERE user = $username";
     $result = $conn -> query($sql);
 }
 ?>
@@ -111,6 +112,9 @@ if (isset($_GET['id'])) {
                                 class="nav-text">Add user</span></a>
                     </li>
                     <?php } ?>
+                    <li><a href="submitted.php" aria-expanded="false"><i class="icon icon-users-mm"></i><span
+                                class="nav-text">Submitted</span></a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -135,7 +139,6 @@ if (isset($_GET['id'])) {
                 <table class="table table-bordered table-responsive-sm">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>Name</th>
                             <th>FileUpload</th>
                             <th>Delete</th>
@@ -144,18 +147,11 @@ if (isset($_GET['id'])) {
                     <tbody>
                         <?php while ($row = $result -> fetch_assoc()) { ?>
                         <tr>
-                            <td><?php echo htmlentities($row['idChall']); ?></td>
-                            <td><?php echo htmlentities($row['Challname'])?></td>
-                            <td><?php echo htmlentities($row['Challoverview']); ?></td>
-                            <td><?php echo htmlentities($row['Challdescription']); ?></td>
-                            <td><a href="<?php echo htmlentities($row['Challfolder']) ; ?>"
+                            <td><?php echo htmlentities($row['user']); ?></td>
+                            <td><a href="<?php echo htmlentities($row['folder']) ; ?>"
                                     class="btn btn-outline-success">Dowload</td>
-                            <td><a href="submit.php?idChall=<?php echo htmlentities($row['idChall']); ?>"
-                                    class="btn btn-primary">Submit</a></td>
-                            <?php if (isset($_SESSION['role']) && ( $_SESSION['role'] == 'teacher')) { ?>
                             <td><a href="delete_user.php?idChall=<?php echo htmlentities($row['idChall']); ?>"
                                     class="btn btn-danger">Delete</a></td>
-                            <?php } ?>
                         </tr>
                         <?php } ?>
                     </tbody>

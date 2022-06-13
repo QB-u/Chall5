@@ -1,6 +1,5 @@
 <?php
 include 'session.php';
-require_once 'ConnectDB.php';
 if (!(isset($_SESSION['is_login']) && $_SESSION['is_login'] == true)) {
     header('Location: login.php');
     exit();
@@ -10,8 +9,8 @@ $conn = mysqli_connect($MYSQL_HOST,$MYSQL_USERNAME,$MYSQL_PASSWORD);
 if (!$conn) {
     die('Could not connect: ' . mysql_error());
 }
-$username = $_SESSION['username'];
 mysqli_select_db($conn,$MYSQL_DB);
+$username = $_SESSION['username'];
 if(isset($_GET['idChall'])){
     $id = $_GET['idChall'];
     $sql = "SELECT * FROM Chall WHERE idChall = $id";
@@ -151,6 +150,9 @@ if (isset($_POST[Submit])){
                                 class="nav-text">Add user</span></a>
                     </li>
                     <?php } ?>
+                    <li><a href="submitted.php" aria-expanded="false"><i class="icon icon-users-mm"></i><span
+                                class="nav-text">Submitted</span></a>
+                    </li>
                 </ul>
             </div>
         </div>
