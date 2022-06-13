@@ -2,7 +2,7 @@
     include 'session.php';
     include 'ConnectDB.php';
     if (isset($_GET['id']) && $_SESSION['role'] = 'teacher'){
-        $id = (int)mysqli_real_escape_string($conn,$_GET['id']);
+        $id = (int)($_GET['id']);
         $sql = "DELETE FROM UserInformation WHERE id = $id";
         $result = $conn -> query($sql);
         if ($result) {
@@ -15,7 +15,7 @@
         }
     }
     if (isset ($_GET['idChall']) && $_SESSION['role'] == 'teacher') {
-        $id = (int)mysqli_real_escape_string($conn,$_GET['idChall']);
+        $id = (int)($_GET['idChall']);
         $sql = "DELETE FROM Chall WHERE idChall = $id";
         $result = $conn -> query($sql);
         if ($result) {
@@ -28,7 +28,7 @@
         }
     }
     if (isset ($_GET['idsubmit']) && $_SESSION['role'] == 'teacher') {
-        $id = (int)mysqli_real_escape_string($conn,$_GET['idsubmit']);
+        $id = (int)($_GET['idsubmit']);
         $sql = "DELETE FROM submit WHERE idsubmit = $id";
         $result = $conn -> query($sql);
         if ($result) {

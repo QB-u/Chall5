@@ -12,7 +12,7 @@ if (!$conn) {
 mysqli_select_db($conn,$MYSQL_DB);
 $username = $_SESSION['username'];
 if(isset($_GET['idChall'])){
-    $id = (int)mysqli_real_escape_string($conn,$_GET['idChall']);
+    $id = (int)($_GET['idChall']);
     $sql = "SELECT * FROM Chall WHERE idChall = $id";
     $result = $conn -> query($sql);
     $row = $result -> fetch_assoc();

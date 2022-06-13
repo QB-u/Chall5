@@ -6,7 +6,7 @@ if (!(isset($_SESSION['is_login']) && $_SESSION['is_login'] == true)) {
 }
 include 'ConnectDB.php';
 if (isset($_GET['id'])) {
-    $id = (int)mysqli_real_escape_string($conn, $_GET['id']);
+    $id = (int)($_GET['id']);
     $sql = "SELECT * FROM submit WHERE idsubmit = $id";
     $result = $conn -> query($sql);
 }
