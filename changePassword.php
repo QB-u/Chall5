@@ -2,9 +2,9 @@
 session_start();
 include 'ConnectDB.php';
 if (isset($_POST['changePassword'])){
-    $oldPassword = $_POST['oldPassword'];
-    $newPassword = $_POST['newPassword'];
-    $confirmPassword = $_POST['confirmPassword'];
+    $oldPassword = mysqli_real_escape_string($conn,$_POST['oldPassword']);
+    $newPassword = mysqli_real_escape_string($conn,$_POST['newPassword']);
+    $confirmPassword = mysqli_real_escape_string($conn,$_POST['confirmPassword']);
     if ($_SESSION['password'] === $oldPassword && $newPassword === $confirmPassword) {
         $sql = "UPDATE UserInformation SET password = '$newPassword' WHERE ID = '$_SESSION[id]'";
         $result = $conn -> query($sql);
