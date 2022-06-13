@@ -31,9 +31,10 @@ if (isset($_POST['AddExercise'])){
     if (in_array($fileActualExt,$allowed)){
         if ($fileError === 0){
             if ($fileSize < 1000000){
-                $fileDestination = 'upload/'.$fileName;
+                $fileNameNew = md5($fileName).'.'.$fileActualExt;
+                $fileDestination = 'upload/'.$fileNameNew;
                 move_uploaded_file($fileTmpName,$fileDestination);
-                $sql = "INSERT INTO Chall (Challname,Challoverview,Challdescription,Challfolder,filename,Challtype) VALUES ('$name','$overview','$Description','$fileDestination','$fileName','$fileActualExt')";
+                $sql = "INSERT INTO Chall (Challname,Challoverview,Challdescription,Challfolder,filename,Challtype) VALUES ('$name','$overview','$Description','$fileDestination','$fileNameNew','$fileActualExt')";
                 $result = $conn -> query($sql);
                 if ($result) {
                     echo "<script>alert('Add exercise success');</script>";

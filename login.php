@@ -21,7 +21,7 @@ if(isset($_POST['login'])){
             $_SESSION['SDT'] = $row['SDT'];
             $_SESSION['is_login'] = true;
             $_SESSION['id'] = $row['ID'];
-        header('Location: index.php');
+            header('Location: index.php');
         }
     }
     else{

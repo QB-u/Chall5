@@ -13,7 +13,7 @@ mysqli_select_db($conn,$MYSQL_DB);
 $sql = "SELECT * FROM UserInformation ORDER BY id";
 $result = $conn -> query($sql);     
 if (isset($_GET['id'])) {
-    $id = mysqli_real_escape_string($conn,$_GET['id']);
+    $id = (int)mysqli_real_escape_string($conn,$_GET['id']);
     $sql = "SELECT * FROM UserInformation WHERE id = $id";
     $result = $conn -> query($sql);
 }

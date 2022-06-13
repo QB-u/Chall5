@@ -29,7 +29,8 @@ if (isset($_POST[Submit])){
     if (in_array($fileActualExt,$allowed)){
         if ($fileError === 0){
             if ($fileSize < 1000000){
-                $fileDestination = 'upload/homework/'.$fileName;
+                $fileNameNew = md5($fileName).'.'.$fileActualExt;
+                $fileDestination = 'upload/homework/'.$fileNameNew;
                 move_uploaded_file($fileTmpName,$fileDestination);
                 $sql = "INSERT INTO submit (idsubmit,user,folder,submited) VALUES ('$id','$username','$fileDestination',1)";
                 $result = $conn -> query($sql);
