@@ -10,11 +10,11 @@ if (!(isset($_SESSION['role']) && $_SESSION['role'] == 'teacher')) {
     exit();
 }
 if (isset($_POST['Add_user'])){
-    $username = $_POST['username'];
-    $SDT = $_POST['SDT'];
-    $password = $_POST['password'];
-    $fullname = $_POST['fullname'];
-    $email = $_POST['email'];
+    $username = mysqli_real_escape_string($conn,$_POST['username']);
+    $SDT = mysqli_real_escape_string($conn,$_POST['SDT']);
+    $password = mysqli_real_escape_string($conn,$_POST['password']);
+    $fullname = mysqli_real_escape_string($conn,$_POST['fullname']);
+    $email = mysqli_real_escape_string($conn,$_POST['email']);
     $sql = "INSERT INTO UserInformation (username,password,fullname,Email,SDT) VALUES ('$username','$password','$fullname','$email','$SDT')";
     $result = $conn -> query($sql);
     if ($result) {

@@ -17,9 +17,9 @@ if (!$conn) {
 mysqli_select_db($conn,$MYSQL_DB);
 //upload file
 if (isset($_POST['AddExercise'])){
-    $overview = $_POST['Overview'];
-    $name = $_POST['Name'];
-    $Description = $_POST['Description'];
+    $overview = mysqli_real_escape_string($conn,$_POST['overview']);
+    $name = mysqli_real_escape_string($conn,$_POST['name']);
+    $Description = mysqli_real_escape_string($conn,$_POST['Description']);
     $file = $_FILES['file'];
     $fileName = $file['name'];
     $fileTmpName = $file['tmp_name'];
